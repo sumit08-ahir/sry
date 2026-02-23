@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>I’m Sorry ❤️</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    font-family:'Segoe UI',sans-serif;
+    text-align:center;
+    overflow:hidden;
+    background: linear-gradient(135deg,#ff758c,#ff7eb3);
+}
+
+/* Floating Hearts */
+.heart{
+    position:absolute;
+    color:white;
+    animation:float 6s linear infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(100vh);}
+    100%{transform:translateY(-10vh);}
+}
+
+/* Pages */
+.page{
+    display:none;
+    padding-top:40px;
+}
+
+.active{
+    display:block;
+}
+
+/* Buttons */
+button{
+    padding:15px 55px;
+    margin:6px;
+    border:none;
+    border-radius:25px;
+    font-size:14px;
+    cursor:pointer;
+    background:white;
+    color:#ff4e50;
+    transition:0.4s;
+}
+
+button:hover{
+    background:#ff4e50;
+    color:white;
+    transform:scale(1.1);
+}
+
+/* Image */
+img{
+    width:260px;
+    border-radius:20px;
+    box-shadow:0 0 25px white;
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.05);}
+    100%{transform:scale(1);}
+}
+
+h1{
+    font-size:28px;
+    color:white;
+    text-shadow:0 0 20px black;
+}
+
+p{
+    width:85%;
+    margin:auto;
+    font-size:18px;
+    color:white;
+    min-height:80px;
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- HOME -->
+<div id="home" class="page active">
+<h1>I’m Sorry For My Bad Behavior 💔</h1>
+<div id="buttonsContainer"></div>
+</div>
+
+<!-- SORRY PAGE -->
+<div id="sorryPage" class="page">
+<img src="photo.jpg">
+<h1>Please Forgive Me ❤️</h1>
+<p id="message"></p>
+<br>
+<button onclick="goHome()">Back To Home 💕</button>
+</div>
+
+<script>
+
+/* 50 DIFFERENT HEARTFELT MESSAGES */
+const messages = [
+"I am deeply sorry for my bad behavior. You deserved patience and love from me.",
+"I regret the way I acted. I should have treated you with more respect.",
+"I’m sorry for hurting you with my attitude. That was never my intention.",
+"I apologize for my immature behavior. I promise to grow and be better.",
+"I’m ashamed of how I reacted. You deserve kindness, not anger.",
+"I’m truly sorry for speaking harshly. My words were wrong.",
+"I failed to control my emotions, and I hurt you. I’m sorry.",
+"You mean everything to me, and I hate that I caused you hurt.",
+"I’m sorry for not understanding your feelings properly.",
+"I should have listened instead of reacting. I’m truly sorry.",
+"I regret raising my voice. You deserve calm love.",
+"I’m sorry for my ego getting in the way of our happiness.",
+"I never want to be the reason for your tears. Forgive me.",
+"I’m sorry for being insensitive to your feelings.",
+"I let my frustration hurt you, and I regret it deeply.",
+"You are precious to me. I’m sorry for not acting like it.",
+"I’m sorry for my careless behavior.",
+"I promise to work on myself for us.",
+"I’m sorry for disappointing you.",
+"I should have handled the situation maturely.",
+"I regret every moment that made you sad.",
+"I’m sorry for taking you for granted.",
+"You deserve better from me, and I will improve.",
+"I’m sorry for reacting without thinking.",
+"I never want to lose you because of my mistakes.",
+"I’m sorry for my stubbornness.",
+"I hurt you, and that hurts me too.",
+"I promise to respect you more.",
+"I’m sorry for being unfair to you.",
+"I regret my tone and behavior.",
+"I should have been more loving.",
+"I’m sorry for ignoring your feelings.",
+"I promise to change my bad habits.",
+"I’m sorry for making you feel unimportant.",
+"You are my priority, and I failed to show it.",
+"I regret my actions deeply.",
+"I’m sorry for being impatient.",
+"I never meant to make you cry.",
+"I promise to communicate better.",
+"I’m sorry for not being calm.",
+"I regret letting anger control me.",
+"I’m sorry for every rude word I said.",
+"I should have hugged you instead of arguing.",
+"I promise to protect your heart.",
+"I’m sorry for hurting the one I love most.",
+"I will learn from my mistakes.",
+"I’m sorry for not valuing your emotions.",
+"I promise to treat you better every day.",
+"I regret my behavior more than anything.",
+"I love you deeply, and I am truly sorry."
+];
+
+/* Create 50 Buttons */
+const container = document.getElementById("buttonsContainer");
+
+for(let i=1;i<=50;i++){
+    let btn = document.createElement("button");
+    btn.innerText = "Sorry " + i;
+    btn.onclick = function(){ openPage(i); };
+    container.appendChild(btn);
+}
+
+/* Open Page */
+function openPage(num){
+    document.getElementById("home").classList.remove("active");
+    document.getElementById("sorryPage").classList.add("active");
+    typeWriter(messages[num-1]);
+}
+
+/* Back */
+function goHome(){
+    document.getElementById("sorryPage").classList.remove("active");
+    document.getElementById("home").classList.add("active");
+}
+
+/* Typewriter Effect */
+function typeWriter(text){
+    let i = 0;
+    document.getElementById("message").innerHTML = "";
+    let speed = 35;
+
+    function typing(){
+        if(i < text.length){
+            document.getElementById("message").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing, speed);
+        }
+    }
+    typing();
+}
+
+/* Floating Hearts */
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=Math.random()*20+15+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+}
+
+setInterval(createHeart,300);
+
+</script>
+
+</body>
+</html>
